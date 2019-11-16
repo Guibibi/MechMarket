@@ -25,17 +25,28 @@
             <span slot="title">
               <a-icon type="user" />subnav 1
             </span>
-            <a-menu-item key="1">New</a-menu-item>
-            <a-menu-item key="3">Hot</a-menu-item>
+            <a-menu-item key="1">option1</a-menu-item>
+            <a-menu-item key="2">option2</a-menu-item>
+            <a-menu-item key="3">option3</a-menu-item>
+            <a-menu-item key="4">option4</a-menu-item>
           </a-sub-menu>
           <a-sub-menu key="sub2">
             <span slot="title">
               <a-icon type="laptop" />subnav 2
             </span>
-            <a-menu-item key="5">United States</a-menu-item>
-            <a-menu-item key="6">Canada</a-menu-item>
-            <a-menu-item key="7">Australia</a-menu-item>
-            <a-menu-item key="8">European Union</a-menu-item>
+            <a-menu-item key="5">option5</a-menu-item>
+            <a-menu-item key="6">option6</a-menu-item>
+            <a-menu-item key="7">option7</a-menu-item>
+            <a-menu-item key="8">option8</a-menu-item>
+          </a-sub-menu>
+          <a-sub-menu key="sub3">
+            <span slot="title">
+              <a-icon type="notification" />subnav 3
+            </span>
+            <a-menu-item key="9">option9</a-menu-item>
+            <a-menu-item key="10">option10</a-menu-item>
+            <a-menu-item key="11">option11</a-menu-item>
+            <a-menu-item key="12">option12</a-menu-item>
           </a-sub-menu>
         </a-menu>
       </a-layout-sider>
@@ -47,58 +58,39 @@
         </a-breadcrumb>
         <a-layout-content
           :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
-        >Content</a-layout-content>
+        >
+          <posts />
+        </a-layout-content>
       </a-layout>
     </a-layout>
   </a-layout>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      collapsed: false
+    };
+  }
+};
+</script>
 
 <style>
-html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+#components-layout-demo-top-side-2 .logo {
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 28px 16px 0;
+  float: left;
 }
 </style>
+
+<script>
+import Posts from "~/components/posts.vue";
+
+export default {
+  components: {
+    Posts
+  }
+};
+</script>
