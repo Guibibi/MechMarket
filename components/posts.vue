@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       posts: [],
-      url: `https://reddit.com/r/mechmarket/search.json?sort=new&q=title:("[CA-" NOT "[US-CA]")&restrict_sr=true&t=all`
+      url: `https://cors-anywhere.herokuapp.com/reddit.com/r/mechmarket/search.json?sort=new&q=title:("[CA-" NOT "[US-CA]")&restrict_sr=true&t=all`
     };
   },
   methods: {
