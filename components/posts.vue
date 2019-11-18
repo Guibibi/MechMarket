@@ -4,22 +4,18 @@
       <div>
         <a-row :gutter="16">
           <a-col :span="12" v-for="post in posts" :key="post.id">
-            <a-card
-              :title="post.data.title"
-              :href="post.data.url"
-              :style="{ margin: '1rem 0px 0px'}"
-            >
-              <a :href="post.data.url" slot="extra">Go to thread</a>
+            <a-card :title="post.data.title" :style="{ margin: '1rem 0px 0px'}">
+              <a :href="post.data.url" slot="extra" target="_blank">Go to thread</a>
               <template class="ant-card-actions" slot="actions">
                 <span>
                   <p>{{convertTime(post.data.created_utc)}}</p>
                 </span>
                 <div>
-                  <a-icon type="edit" />
+                  <a-icon type="message" />
                   <span>{{post.data.num_comments}}</span>
                 </div>
                 <div>
-                  <a-icon type="ellipsis" />
+                  <a-icon type="like" />
                   <span>{{post.data.score}}</span>
                 </div>
               </template>
