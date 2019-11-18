@@ -43,8 +43,6 @@ export default {
     },
     convertTime(time) {
       time = new Date(time * 1000);
-      console.log("Reddit time", time);
-
       return this.$dateFns.formatDistanceToNow(time);
     }
   },
