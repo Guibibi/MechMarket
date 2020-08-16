@@ -6,7 +6,7 @@
       </div>
     </a-layout-header>
     <a-layout>
-      <a-layout-sider collapsible width="200" style="background: #fff">
+      <a-layout-sider collapsible>
         <a-menu
           mode="inline"
           :defaultSelectedKeys="['1']"
@@ -16,17 +16,19 @@
         >
           <a-sub-menu key="sub1">
             <span slot="title">
-              <a-icon type="user" />Sort by Region
+              <a-icon type="user" />
+              <span>Sort by Region</span>
             </span>
             <a-menu-item key="1" v-on:click="setPrefCookie('all')">All</a-menu-item>
-            <a-menu-item key="2">United States</a-menu-item>
-            <a-menu-item key="3">Canada</a-menu-item>
-            <a-menu-item key="4">Australia</a-menu-item>
-            <a-menu-item key="5">Europe</a-menu-item>
+            <a-menu-item key="2" v-on:click="setPrefCookie('usa')">United States</a-menu-item>
+            <a-menu-item key="3" v-on:click="setPrefCookie('can')">Canada</a-menu-item>
+            <a-menu-item key="4" v-on:click="setPrefCookie('aus')">Australia</a-menu-item>
+            <a-menu-item key="5" v-on:click="setPrefCookie('eur')">Europe</a-menu-item>
           </a-sub-menu>
           <a-sub-menu key="sub2">
             <span slot="title">
-              <a-icon type="laptop" />Sort by Flair
+              <a-icon type="laptop" />
+              <span>Sort by flair</span>
             </span>
             <a-menu-item key="6">Interest Check</a-menu-item>
             <a-menu-item key="7">Group Buy</a-menu-item>
@@ -46,21 +48,7 @@
     </a-layout>
   </a-layout>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      collapsed: false
-    };
-  },
-  methods: {
-    setPrefCookie(token) {
-      console.log(token);
-      localStorage.setItem(country, token);
-    }
-  }
-};
-</script>
+
 
 <style lang="scss">
 .logo-text {
@@ -71,14 +59,36 @@ export default {
   border-bottom: 5px;
   border-color: white;
 }
+
+a-layout-slider {
+  width: 200px;
+}
 </style>
+
 
 <script>
 import Posts from "~/components/posts.vue";
-
 export default {
   components: {
-    Posts
-  }
+    Posts,
+  },
+
+  data() {
+    return {
+      collapsed: true,
+    };
+  },
+  methods: {
+    // Called when clicking on a region in the sidebar to set it as a preference.
+    setPrefCookie: function (token) {
+      localStorage.setItem("country", token);
+    },
+  },
+  mounted() {
+    //Set the default option for country to all if localStorage key doesn't exist.
+    if (localStorage.getItem("country") === null) {
+      localStorage.setItem("country", "all");
+    }
+  },
 };
 </script>

@@ -11,12 +11,24 @@
                   <p>{{convertTime(post.data.created_utc)}}</p>
                 </span>
                 <div>
-                  <a-icon type="message" />
-                  <span>{{post.data.num_comments}}</span>
+                  <a-tooltip>
+                    <template slot="title">Comments</template>
+                    <a-icon type="message" />
+                    <span class="bottom-number">{{post.data.num_comments}}</span>
+                  </a-tooltip>
                 </div>
                 <div>
-                  <a-icon type="like" />
-                  <span>{{post.data.score}}</span>
+                  <a-tooltip>
+                    <template slot="title">Upvotes</template>
+                    <a-icon type="like" />
+                    <span class="bottom-number">{{post.data.score}}</span>
+                  </a-tooltip>
+                </div>
+                <div>
+                  <a-tooltip>
+                    <template slot="title">Go to thread</template>
+                    <a-icon type="logout" />
+                  </a-tooltip>
                 </div>
               </template>
             </a-card>
@@ -36,26 +48,50 @@ export default {
       urlUS: `https://cors-anywhere.herokuapp.com/reddit.com/r/mechmarket/search.json?sort=new&q=title:("[US")&restrict_sr=true&t=all`,
       urlEU: `https://cors-anywhere.herokuapp.com/reddit.com/r/mechmarket/search.json?sort=new&q=title:("[EU")&restrict_sr=true&t=all`,
       urlAU: `https://cors-anywhere.herokuapp.com/reddit.com/r/mechmarket/search.json?sort=new&q=title:("[AU")&restrict_sr=true&t=all`,
-      url: `https://cors-anywhere.herokuapp.com/reddit.com/r/mechmarket/new.json`
+      url: `https://cors-anywhere.herokuapp.com/reddit.com/r/mechmarket/new.json`,
+      country: "",
     };
   },
   methods: {
     fetchPosts() {
       let requestUrl = "";
-      this.$axios.$get(this.url).then(res => {
+      switch (localStorage.getItem("country")) {
+        case "all":
+          this.requestUrl = this.url;
+          break;
+        case "can":
+          this.requestUrl = this.urlCA;
+          break;
+        case "usa":
+          this.requestUrl = this.urlUS;
+          break;
+        case "eur":
+          this.requestUrl = this.urlEU;
+          break;
+        case "aus":
+          this.requestUrl = this.urlAUS;
+          break;
+        default:
+          break;
+      }
+      this.$axios.$get(this.requestUrl).then((res) => {
         this.posts = this.posts.concat(res.data.children);
       });
     },
     convertTime(time) {
       time = new Date(time * 1000);
       return this.$dateFns.formatDistanceToNow(time);
-    }
+    },
   },
   mounted() {
     this.fetchPosts();
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+.bottom-number {
+  margin-left: 5px;
+  font-weight: bold;
+}
 </style>
