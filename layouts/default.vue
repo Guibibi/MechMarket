@@ -6,7 +6,7 @@
       </div>
     </a-layout-header>
     <a-layout>
-      <a-layout-sider width="200" style="background: #fff">
+      <a-layout-sider collapsible width="200" style="background: #fff">
         <a-menu
           mode="inline"
           :defaultSelectedKeys="['1']"
@@ -18,7 +18,7 @@
             <span slot="title">
               <a-icon type="user" />Sort by Region
             </span>
-            <a-menu-item key="1">All</a-menu-item>
+            <a-menu-item key="1" v-on:click="setPrefCookie('all')">All</a-menu-item>
             <a-menu-item key="2">United States</a-menu-item>
             <a-menu-item key="3">Canada</a-menu-item>
             <a-menu-item key="4">Australia</a-menu-item>
@@ -52,6 +52,12 @@ export default {
     return {
       collapsed: false
     };
+  },
+  methods: {
+    setPrefCookie(token) {
+      console.log(token);
+      localStorage.setItem(country, token);
+    }
   }
 };
 </script>

@@ -32,11 +32,16 @@ export default {
   data() {
     return {
       posts: [],
-      url: `https://cors-anywhere.herokuapp.com/reddit.com/r/mechmarket/search.json?sort=new&q=title:("[CA-" NOT "[US-CA]")&restrict_sr=true&t=all`
+      urlCA: `https://cors-anywhere.herokuapp.com/reddit.com/r/mechmarket/search.json?sort=new&q=title:("[CA-" NOT "[US-CA]")&restrict_sr=true&t=all`,
+      urlUS: `https://cors-anywhere.herokuapp.com/reddit.com/r/mechmarket/search.json?sort=new&q=title:("[US")&restrict_sr=true&t=all`,
+      urlEU: `https://cors-anywhere.herokuapp.com/reddit.com/r/mechmarket/search.json?sort=new&q=title:("[EU")&restrict_sr=true&t=all`,
+      urlAU: `https://cors-anywhere.herokuapp.com/reddit.com/r/mechmarket/search.json?sort=new&q=title:("[AU")&restrict_sr=true&t=all`,
+      url: `https://cors-anywhere.herokuapp.com/reddit.com/r/mechmarket/new.json`
     };
   },
   methods: {
     fetchPosts() {
+      let requestUrl = "";
       this.$axios.$get(this.url).then(res => {
         this.posts = this.posts.concat(res.data.children);
       });
