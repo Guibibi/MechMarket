@@ -5,7 +5,6 @@
         <a-row :gutter="16">
           <a-col :span="12" v-for="post in posts" :key="post.id">
             <a-card :title="post.data.title" :style="{ margin: '1rem 0px 0px'}">
-              <a :href="post.data.url" slot="extra" target="_blank">Go to thread</a>
               <template class="ant-card-actions" slot="actions">
                 <span>
                   <p>{{convertTime(post.data.created_utc)}}</p>
@@ -14,7 +13,7 @@
                   <a-tooltip>
                     <template slot="title">Comments</template>
                     <a-icon type="message" />
-                    <span class="bottom-number">{{post.data.num_comments}}</span>
+                    <span class="bottom-number">{{post.data.num_comments - 1}}</span>
                   </a-tooltip>
                 </div>
                 <div>
@@ -25,10 +24,12 @@
                   </a-tooltip>
                 </div>
                 <div>
-                  <a-tooltip>
-                    <template slot="title">Go to thread</template>
-                    <a-icon type="logout" />
-                  </a-tooltip>
+                  <a :href="post.data.url" slot="extra" target="_blank">
+                    <a-tooltip>
+                      <template slot="title">Go to thread</template>
+                      <a-icon type="logout" />
+                    </a-tooltip>
+                  </a>
                 </div>
               </template>
             </a-card>
