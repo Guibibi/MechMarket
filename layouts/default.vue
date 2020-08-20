@@ -1,7 +1,8 @@
 <template>
   <a-layout id="base-layout">
     <a-layout-header class="header">
-      <div class="logo">
+      <div class="header-logo">
+        <img src="~/assets/logo.svg" alt="Logo" class="logo" />
         <span class="logo-text">MechMarket</span>
       </div>
     </a-layout-header>
@@ -37,8 +38,16 @@
 
 
 <style lang="scss">
+.logo {
+  height: 48px;
+  width: 48px;
+  margin-bottom: 15px;
+}
+
 .logo-text {
   color: white;
+  margin-left: 15px;
+  font-size: 24px;
 }
 
 .header {

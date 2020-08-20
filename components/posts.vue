@@ -102,9 +102,19 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .bottom-number {
   margin-left: 5px;
   font-weight: bold;
+}
+
+.ant-card-actions {
+  > li {
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+    > span span p {
+      margin-bottom: 0px;
+    }
+  }
 }
 </style>
