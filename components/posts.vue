@@ -3,6 +3,14 @@
     <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
       <div>
         <a-row :gutter="16">
+          <a-spin :spinning="loading">
+            <a-icon
+              slot="indicator"
+              type="loading"
+              style="font-size: 128px; position:absolute; top:300px; left:50%"
+              spin
+            />
+          </a-spin>
           <a-col :span="12" v-for="post in posts" :key="post.id">
             <a-card :title="post.data.title" :style="{ margin: '1rem 0px 0px'}">
               <template class="ant-card-actions" slot="actions">
@@ -51,10 +59,13 @@ export default {
       urlAU: `https://cors-anywhere.herokuapp.com/reddit.com/r/mechmarket/search.json?sort=new&q=title:("[AU")&restrict_sr=true&t=all`,
       url: `https://cors-anywhere.herokuapp.com/reddit.com/r/mechmarket/new.json`,
       country: "",
+      loading: true,
     };
   },
   methods: {
     fetchPosts() {
+      this.posts = [];
+      this.loading = true;
       let requestUrl = "";
       switch (localStorage.getItem("country")) {
         case "all":
@@ -70,13 +81,14 @@ export default {
           this.requestUrl = this.urlEU;
           break;
         case "aus":
-          this.requestUrl = this.urlAUS;
+          this.requestUrl = this.urlAU;
           break;
         default:
           break;
       }
       this.$axios.$get(this.requestUrl).then((res) => {
         this.posts = this.posts.concat(res.data.children);
+        this.loading = false;
       });
     },
     convertTime(time) {

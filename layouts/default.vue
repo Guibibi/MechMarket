@@ -8,7 +8,6 @@
     <a-layout>
       <a-layout-sider collapsible>
         <a-menu
-          ref="menu"
           mode="inline"
           :style="{ height: '100%', borderRight: 0 }"
           theme="light"
@@ -29,7 +28,7 @@
         <a-layout-content
           :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
         >
-          <posts />
+          <posts ref="posts" />
         </a-layout-content>
       </a-layout>
     </a-layout>
@@ -49,6 +48,10 @@
 
 a-layout-slider {
   width: 200px;
+}
+
+.ant-layout {
+  min-height: 93vh;
 }
 </style>
 
@@ -70,6 +73,7 @@ export default {
     setPrefCookie: function (token) {
       localStorage.setItem("country", token);
       this.countryOption = [token];
+      this.$refs.posts.fetchPosts();
     },
   },
   mounted() {
